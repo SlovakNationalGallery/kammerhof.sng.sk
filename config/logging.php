@@ -48,8 +48,7 @@ return [
 
     'channels' => [
         'import' => [
-            'driver' => 'slack',
-            'url' => env('LOG_IMPORT_WEBHOOK'),
+            'driver' => 'stack',
             'level' => 'info',
         ],
 
