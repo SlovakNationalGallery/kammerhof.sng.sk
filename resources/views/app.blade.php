@@ -43,7 +43,7 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     {{-- /GTM --}}
-    <div id="app" class="md:max-w-lg md:mx-auto md:my-auto bg-white min-h-screen flex flex-col"></div>
+    <div id="app" class="lg:max-w-3xl lg:mx-auto lg:my-auto bg-white min-h-screen flex flex-col"></div>
 </body>
 
 </html>
