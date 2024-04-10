@@ -8,8 +8,22 @@
                 {{ $t('Share') }}
             </button> -->
         </div>
-        <LanguageSwitcher v-else-if="route.name === 'home'" />
-        <ViewedItemsCount v-else class="flex-1 border-l-2 border-l-transparent px-4 py-2" :show-tooltip="isActive" />
+        <!-- <LanguageSwitcher v-else-if="route.name === 'home'" /> -->
+        <!-- <ViewedItemsCount v-else class="flex-1 border-l-2 border-l-transparent px-4 py-2" :show-tooltip="isActive" /> -->
+        <div class="items-center flex">
+            <button @click="shownResetModal = true" class="flex py-2 px-3 text-base font-bold items-center">
+                <svg class="w-8 h-8 fill-none stroke-black stroke-2 mr-2" viewBox="0 0 32 32">
+                    <g clip-path="url(#clip0_373_552)">
+                        <path d="M8 8C8 8 11 5 16 5C23 5 27 12 27 12" />
+                        <path d="M24 24C24 24 21 27 16 27C9 27 5 20 5 20" />
+                        <path d="M21 12H27V6" />
+                        <path d="M11 20H5V26" />
+                    </g>
+                </svg>
+
+                Začni odznova
+            </button>
+        </div>
     </div>
 
     <About :opened="openedAbout" />
@@ -33,6 +47,8 @@ const openedAbout = ref(false)
 const interactionStore = useInteractionStore()
 const isActive = ref(false)
 
+const shownResetModal = ref(false)
+
 const displayTooltip = () => {
     isActive.value = true
     setTimeout(() => {
@@ -40,7 +56,7 @@ const displayTooltip = () => {
     }, 3000)
 }
 
-const title = computed(() => this?.$route?.meta?.title ? this.$route.meta.title : 'Kammerhof App')
+const title = computed(() => (this?.$route?.meta?.title ? this.$route.meta.title : 'Kammerhof App'))
 
 const scroll = (id) => {
     document.getElementById(id).scrollIntoView({
