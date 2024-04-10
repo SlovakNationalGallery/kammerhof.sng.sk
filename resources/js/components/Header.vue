@@ -1,10 +1,10 @@
 <template>
-    <div class="sticky px-6 pt-12 pb-2 top-0 z-20 flex w-full items-center whitespace-nowrap bg-green">
+    <div class="sticky px-6 pt-12 pb-2 top-0 z-20 flex w-full items-center whitespace-nowrap bg-yellow">
         <h1 class="grow text-2xl font-black" :class="{ 'text-center': route.name !== 'home' }" id="title">
             {{ $t(openedAbout ? 'About the App' : route.meta.title ?? '') }}
         </h1>
         <div class="flex-1 border-l-2 border-transparent px-3 text-right" v-if="route.name === 'my_collection'">
-            <!-- <button class="rounded-xl bg-green px-3 py-1 text-sm font-bold" @click="scroll('share')">
+            <!-- <button class="rounded-xl bg-yellow px-3 py-1 text-sm font-bold" @click="scroll('share')">
                 {{ $t('Share') }}
             </button> -->
         </div>

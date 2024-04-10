@@ -28,7 +28,7 @@
                 <button
                     @click="shown = !shown"
                     class="my-2 min-w-[120px] rounded-full bg-black px-3 py-2 text-sm font-medium leading-4 text-white duration-300 ease-in-out"
-                    :class="[peekingIn ? 'text-lg text-green' : 'text-white']"
+                    :class="[peekingIn ? 'text-lg text-yellow' : 'text-white']"
                 >
                     {{ $t(shown ? 'Hide' : 'Tap to check the code') }}
                 </button>

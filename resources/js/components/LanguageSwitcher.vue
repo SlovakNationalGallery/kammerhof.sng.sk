@@ -3,7 +3,7 @@
         <button
             @click="switchLanguage('sk')"
             class="px-1 uppercase"
-            :class="{ 'text-green': localeStore.locale === 'sk' }"
+            :class="{ 'text-yellow': localeStore.locale === 'sk' }"
         >
             SK
         </button>
@@ -13,7 +13,7 @@
         <button
             @click="switchLanguage('en')"
             class="px-1 uppercase"
-            :class="{ 'text-green': localeStore.locale === 'en' }"
+            :class="{ 'text-yellow': localeStore.locale === 'en' }"
         >
             EN
         </button>

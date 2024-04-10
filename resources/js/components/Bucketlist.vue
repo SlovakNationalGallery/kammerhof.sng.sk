@@ -26,9 +26,9 @@
                 :class="[{ 'pointer-events-none': !unlocked }, 'block']"
                 :to="{ name: 'reward_detail', params: { id: bucketlist.id } }"
             >
-                <Thumbnail class="mt-4" :class="[unlocked ? 'bg-green' : 'bg-green/20']" :truncate-description="false">
+                <Thumbnail class="mt-4" :class="[unlocked ? 'bg-yellow' : 'bg-yellow/20']" :truncate-description="false">
                     <template #image>
-                        <div class="absolute inset-0 z-10 bg-green/20"></div>
+                        <div class="absolute inset-0 z-10 bg-yellow/20"></div>
                         <ResponsiveImageWithSizes
                             :class="{ grayscale: !unlocked }"
                             class="h-full w-full rounded-xl object-cover"

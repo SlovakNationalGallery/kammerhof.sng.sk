@@ -1,6 +1,6 @@
 <template>
     <div v-if="item">
-        <article class="flex justify-between border-b-2 bg-green/20 p-4 pb-5" v-if="bucketlist">
+        <article class="flex justify-between border-b-2 bg-yellow/20 p-4 pb-5" v-if="bucketlist">
             <div>
                 <h3 class="font-medium">
                     {{ $t('Scavenger hunt:') }} <span class="italic">{{ bucketlist.title }}</span>
@@ -15,7 +15,7 @@
                     :to="
                         unlocked ? { name: 'reward_detail', params: { id: bucketlist.id } } : { name: 'my_collection' }
                     "
-                    class="rounded-xl border-2 bg-green px-4 py-3 text-center font-bold capitalize leading-none"
+                    class="rounded-xl border-2 bg-yellow px-4 py-3 text-center font-bold capitalize leading-none"
                     >{{ $t(unlocked ? 'reward' : 'list') }}</router-link
                 >
             </div>

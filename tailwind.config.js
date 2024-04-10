@@ -30,7 +30,7 @@ module.exports = {
                 DEFAULT: '#f44336',
                 pastel: '#ff6b61',
             },
-            green: '#FFC736',
+            yellow: '#FFC736',
             gray: {
                 softest: '#DDDEE3',
                 soft: '#B9BBC6',
