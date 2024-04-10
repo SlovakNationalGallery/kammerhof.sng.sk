@@ -6,13 +6,13 @@
         <div class="flex cursor-pointer">
             <div class="grow">
                 <div class="flex">
-                    <div class="shrink-0">
+                    <!-- <div class="shrink-0">
                         <img
                             class="h-16 w-16 rounded-xl border-2"
                             src="../../img/avatar-ester.png"
                             alt="Avatar"
                         />
-                    </div>
+                    </div> -->
                     <div class="mx-3 self-center">
                         <div class="font-bold">
                             {{

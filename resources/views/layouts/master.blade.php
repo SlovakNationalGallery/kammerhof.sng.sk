@@ -17,7 +17,7 @@
     <meta name="theme-color" content="#ffffff">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <title>@section('title'){{ trans('Atlas SNG') }}@show</title>
+    <title>@section('title'){{ trans('Kammerhof App') }}@show</title>
 </head>
 
 <body>

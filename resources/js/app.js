@@ -23,7 +23,7 @@ const routes = [
         path: '/',
         component: Interaction,
         meta: {
-            title: 'Atlas SNG',
+            title: 'Názov miestnosti',
         },
     },
     {

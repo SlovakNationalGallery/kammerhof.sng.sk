@@ -41,7 +41,7 @@ module.exports = {
             current: 'currentColor',
         },
         fontFamily: {
-            sans: ['GTWalsheim', 'sans-serif'],
+            sans: ['Satoshi-Variable', 'sans-serif'],
         },
         fontSize: {
             xs: ['12px'],
@@ -52,11 +52,6 @@ module.exports = {
             '1.5xl': ['22px'],
             '2xl': ['24px'],
             '3xl': ['30px'],
-        },
-        fontWeight: {
-            normal: '400',
-            medium: '500',
-            bold: '700',
         },
         height: (theme) => ({
             auto: 'auto',

@@ -12,12 +12,12 @@
     <link rel="manifest" href="/site.webmanifest">
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000000">
     <meta name="theme-color" content="#ffffff">
-    <title>{{ trans('Atlas SNG') }}</title>
+    <title>{{ trans('Kammerhof App') }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body>
-    <div id="app" class="lg:max-w-3xl lg:mx-auto lg:my-auto bg-white min-h-screen flex flex-col"></div>
+    <div id="app" class="lg:max-w-3xl lg:rounded-xl lg:mx-auto lg:my-auto bg-white min-h-screen flex flex-col"></div>
 </body>
 
 </html>

@@ -1,19 +1,7 @@
 <template>
-    <div class="sticky top-0 z-20 flex w-full items-center whitespace-nowrap border-y-2 border-black bg-white">
-        <HistoryBack v-slot="{ back }">
-            <button
-                @click="route.name === 'home' ? (openedAbout = !openedAbout) : back()"
-                class="border-r-2"
-                :class="[route.name === 'home' ? 'border-r-black bg-green p-2' : 'flex-1 border-r-transparent p-3']"
-            >
-                <SvgBack v-if="route.name !== 'home'" />
-                <SvgClose v-else-if="openedAbout" />
-                <SvgLogo v-else />
-            </button>
-        </HistoryBack>
-        <h1 class="grow px-2.5 text-1.5xl font-medium" :class="{ 'text-center': route.name !== 'home' }" id="title">
+    <div class="sticky px-6 pt-12 pb-2 top-0 z-20 flex w-full items-center whitespace-nowrap bg-green">
+        <h1 class="grow text-2xl font-black" :class="{ 'text-center': route.name !== 'home' }" id="title">
             {{ $t(openedAbout ? 'About the App' : route.meta.title ?? '') }}
-            <span v-if="route.name === 'my_collection'">({{ interactionStore.viewedItemsCount }})</span>
         </h1>
         <div class="flex-1 border-l-2 border-transparent px-3 text-right" v-if="route.name === 'my_collection'">
             <!-- <button class="rounded-xl bg-green px-3 py-1 text-sm font-bold" @click="scroll('share')">
@@ -52,7 +40,7 @@ const displayTooltip = () => {
     }, 3000)
 }
 
-const title = computed(() => this?.$route?.meta?.title ? this.$route.meta.title : 'Atlas SNG')
+const title = computed(() => this?.$route?.meta?.title ? this.$route.meta.title : 'Kammerhof App')
 
 const scroll = (id) => {
     document.getElementById(id).scrollIntoView({
