@@ -17,7 +17,7 @@
                     </div>
 
                     <div class="m-4 space-y-4 text-xl">
-                        <div class="flex rounded-xl border-2 border-black bg-green/30 p-2.5" v-if="!isSurveyDone">
+                        <div class="flex rounded-xl border-2 border-black bg-yellow/30 p-2.5" v-if="!isSurveyDone">
                             <div class="shrink-0">
                                 <SvgInfo />
                             </div>

@@ -3,7 +3,7 @@
         <h3 class="flex items-center justify-between gap-x-1 text-1.5xl font-medium leading-6">
             <span class="grow">{{ $t('Explored artworks') }}</span>
             <span>{{ interactionStore.viewedItemsCount }}</span>
-            <SvgEye :class="{ '!fill-green': interactionStore.viewedItemsCount }" />
+            <SvgEye :class="{ '!fill-yellow': interactionStore.viewedItemsCount }" />
         </h3>
         <!-- <template v-if="interactionStore.viewedItemsCount">
             <ShareCollection class="mt-4" />

@@ -1,5 +1,5 @@
 <template>
-    <div class="grow bg-black px-4 pb-bar text-lg text-white">
+    <div class="grow px-4 md:px-24 pb-bar text-2xl font-medium">
         <TransitionGroup name="interactions">
             <template v-for="(interaction, i) in interactionStore.interactions" :key="i">
                 <InteractionStory
@@ -36,7 +36,6 @@
             </template>
         </TransitionGroup>
     </div>
-    <CodePanel />
 </template>
 
 <style setup>
@@ -54,7 +53,6 @@
 import { nextTick, onMounted } from 'vue'
 import { watchDebounced } from '@vueuse/core'
 import { useRoute } from 'vue-router'
-import CodePanel from '../components/CodePanel.vue'
 import InteractionItemFavourited from '../components/InteractionItemFavourited.vue'
 import InteractionItemViewed from '../components/InteractionItemViewed.vue'
 import InteractionSectionViewed from '../components/InteractionSectionViewed.vue'

@@ -30,7 +30,7 @@ module.exports = {
                 DEFAULT: '#f44336',
                 pastel: '#ff6b61',
             },
-            green: '#FFC736',
+            yellow: '#FFC736',
             gray: {
                 softest: '#DDDEE3',
                 soft: '#B9BBC6',
@@ -41,7 +41,7 @@ module.exports = {
             current: 'currentColor',
         },
         fontFamily: {
-            sans: ['GTWalsheim', 'sans-serif'],
+            sans: ['Satoshi-Variable', 'sans-serif'],
         },
         fontSize: {
             xs: ['12px'],
@@ -52,11 +52,7 @@ module.exports = {
             '1.5xl': ['22px'],
             '2xl': ['24px'],
             '3xl': ['30px'],
-        },
-        fontWeight: {
-            normal: '400',
-            medium: '500',
-            bold: '700',
+            '4xl': ['36px'],
         },
         height: (theme) => ({
             auto: 'auto',

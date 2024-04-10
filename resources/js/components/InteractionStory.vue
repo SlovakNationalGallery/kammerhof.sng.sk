@@ -1,32 +1,34 @@
 <template>
     <div class="scroll-my-20" :id="active ? 'active-story' : undefined">
-        <img v-if="first" class="mx-auto mb-8 h-40 markdown" src="../../img/interaction-intro-ester.svg" alt="Ester" />
-        <img
-            v-else-if="activeOrTransitioning"
-            class="h-12 w-12 rounded-xl object-cover"
-            src="../../img/avatar-ester.png"
+        <div class="flex">
+            <img
+            class="h-8 w-8 mr-4"
+            src="../../img/avatar-muzeumbs.png"
             alt="Avatar"
         />
+        {{ $t('Sprievodca') }}
 
-        <div class="my-4 space-y-6 markdown" v-html="story.text"></div>
-
-        <div class="my-4" v-for="image in story.images">
-            <ResponsiveImageWithSizes class="w-full rounded-xl" :image="image" />
         </div>
 
-        <div class="relative my-4" v-if="story.video_embed">
+        <div class="my-4 md:my-6 space-y-6 markdown" v-html="story.text"></div>
+
+        <div class="my-4 md:my-6" v-for="image in story.images">
+            <ResponsiveImageWithSizes class="w-full rounded-xl border-black/15 border-2" :image="image" />
+        </div>
+
+        <div class="relative my-4 md:my-6" v-if="story.video_embed">
             <StoryVideoLightbox :story="story"></StoryVideoLightbox>
         </div>
 
         <button
             :disabled="!active"
             v-show="activeOrTransitioning || linkId === link.id"
-            class="my-4 block flex w-full items-center gap-x-2 rounded-xl border-1 p-3 text-left font-bold leading-8"
+            class="my-4 md:my-6 ml-auto flex items-center gap-x-2 rounded-xl border-1 px-6 py-4 text-center font-bold leading-8 justify-center"
             :class="{
-                'border-green bg-green': activeOrTransitioning,
-                'bg-opacity-20 text-green': activeOrTransitioning && interactionStore.hasVisitedAllLinks(link.story_id),
+                'border-black bg-black text-white': activeOrTransitioning,
+                'bg-opacity-20 text-yellow': activeOrTransitioning && interactionStore.hasVisitedAllLinks(link.story_id),
                 'text-black': activeOrTransitioning && !interactionStore.hasVisitedAllLinks(link.story_id),
-                'border-white/10 text-white': !activeOrTransitioning,
+                'border-white/10 text-black/40': !activeOrTransitioning,
             }"
             @click="emit('navigate', link)"
             v-for="link in story.links"
@@ -40,7 +42,7 @@
         <button
             :disabled="!active"
             v-show="activeOrTransitioning && !first"
-            class="my-4 block flex w-full items-center gap-x-2 rounded-xl text-left text-base leading-8 text-green"
+            class="my-4 mt-7 md:my-6 ml-auto flex items-center gap-x-2 rounded-xl text-left text-lg leading-8 text-black"
             @click="emit('undo')"
         >
             <SvgArrowUp class="flex-none" />

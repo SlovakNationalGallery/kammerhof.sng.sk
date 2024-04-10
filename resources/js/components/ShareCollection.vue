@@ -1,8 +1,8 @@
 <template>
-    <div class="flex items-center rounded-xl bg-green/20 p-2">
+    <div class="flex items-center rounded-xl bg-yellow/20 p-2">
         <SvgLinkSimple class="mx-2 stroke-current" />
         <div class="grow font-medium" ref="urlRef">{{ loading ? $t('Loading...') : url }}</div>
-        <button :disabled="loading" @click="share" class="flex-none rounded-lg bg-green px-3 py-1 font-bold">
+        <button :disabled="loading" @click="share" class="flex-none rounded-lg bg-yellow px-3 py-1 font-bold">
             {{ $t(buttonText) }}
         </button>
     </div>
