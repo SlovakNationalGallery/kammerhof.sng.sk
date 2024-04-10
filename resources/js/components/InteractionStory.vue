@@ -25,7 +25,7 @@
             v-show="activeOrTransitioning || linkId === link.id"
             class="my-4 md:my-6 ml-auto flex items-center gap-x-2 rounded-xl border-1 px-6 py-4 text-center font-bold leading-8 justify-center"
             :class="{
-                'border-yellow bg-yellow': activeOrTransitioning,
+                'border-black bg-black text-white': activeOrTransitioning,
                 'bg-opacity-20 text-yellow': activeOrTransitioning && interactionStore.hasVisitedAllLinks(link.story_id),
                 'text-black': activeOrTransitioning && !interactionStore.hasVisitedAllLinks(link.story_id),
                 'border-white/10 text-black/40': !activeOrTransitioning,
@@ -42,7 +42,7 @@
         <button
             :disabled="!active"
             v-show="activeOrTransitioning && !first"
-            class="my-4 mt-7 md:my-6 ml-auto flex items-center gap-x-2 rounded-xl text-left text-lg leading-8 text-yellow"
+            class="my-4 mt-7 md:my-6 ml-auto flex items-center gap-x-2 rounded-xl text-left text-lg leading-8 text-black"
             @click="emit('undo')"
         >
             <SvgArrowUp class="flex-none" />
