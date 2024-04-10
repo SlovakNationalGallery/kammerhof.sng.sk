@@ -28,7 +28,7 @@
                 'border-green bg-green': activeOrTransitioning,
                 'bg-opacity-20 text-green': activeOrTransitioning && interactionStore.hasVisitedAllLinks(link.story_id),
                 'text-black': activeOrTransitioning && !interactionStore.hasVisitedAllLinks(link.story_id),
-                'border-white/10 text-white': !activeOrTransitioning,
+                'border-white/10 text-black/40': !activeOrTransitioning,
             }"
             @click="emit('navigate', link)"
             v-for="link in story.links"
