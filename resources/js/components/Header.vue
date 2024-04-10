@@ -20,11 +20,21 @@
                         <path d="M11 20H5V26" />
                     </g>
                 </svg>
-
                 Začni odznova
             </button>
         </div>
     </div>
+
+    <CardModal @close="shownResetModal = false" :visible="shownResetModal">
+        <h3 class="my-4 text-4xl font-bold">{{ $t('Reset the conversation') }}</h3>
+        <div class="text-2xl leading-7 mb-8">
+            <p>Chceš začať odznova? Konverzácia sa resetuje.</p>
+        </div>
+        <div class="flex space-x-6">
+            <ConfirmButton class="" @click="shownResetModal = false">{{ $t('Close') }}</ConfirmButton>
+            <ConfirmButton class=" bg-black text-white" @click="resetInteraction">{{ $t('Reset') }}</ConfirmButton>
+        </div>
+    </CardModal>
 
     <About :opened="openedAbout" />
 </template>
@@ -39,9 +49,13 @@ import ViewedItemsCount from './ViewedItemsCount.vue'
 import SvgBack from './svg/Back.vue'
 import SvgClose from './svg/Close.vue'
 import SvgLogo from './svg/Logo.vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
+
+import CardModal from '../components/CardModal.vue'
+import ConfirmButton from '../components/ConfirmButton.vue'
 
 const route = useRoute()
+const router = useRouter()
 
 const openedAbout = ref(false)
 const interactionStore = useInteractionStore()
@@ -69,4 +83,10 @@ interactionStore.$onAction(({ name }) => {
         displayTooltip()
     }
 })
+
+const resetInteraction = () => {
+    interactionStore.clear()
+    router.go()
+}
+
 </script>

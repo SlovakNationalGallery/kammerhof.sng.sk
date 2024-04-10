@@ -52,6 +52,7 @@ module.exports = {
             '1.5xl': ['22px'],
             '2xl': ['24px'],
             '3xl': ['30px'],
+            '4xl': ['36px'],
         },
         height: (theme) => ({
             auto: 'auto',
