@@ -63,6 +63,7 @@ class AirtableMapper
                 'en' => 'Video URL EN',
             ],
             'location_id' => 'Lokácia.0',
+            'story_id' => 'Story node.0',
         ],
         'locations' => [
             'name' => [

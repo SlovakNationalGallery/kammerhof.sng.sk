@@ -48,9 +48,7 @@ Route::get('/sections', function () {
 Route::get('/places', function () {
     $places = Place::with('code', 'code.exhibition')
         ->get()
-        ->sortBy(function ($section) {
-            return $section->code->exhibition_id;
-        });
+        ->sortBy('title');
     return response()->view('places', compact('places'));
 });
 
