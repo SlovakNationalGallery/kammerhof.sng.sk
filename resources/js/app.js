@@ -14,6 +14,7 @@ import SectionDetail from './views/SectionDetail.vue'
 import PlaceDetail from './views/PlaceDetail.vue'
 import RewardDetail from './views/RewardDetail.vue'
 import LockedItemDetail from './views/LockedItemDetail.vue'
+import Settings from './views/Settings.vue'
 import { useHistoryStore } from './stores/HistoryStore'
 import { useLocaleStore } from './stores/LocaleStore'
 
@@ -95,6 +96,14 @@ const routes = [
         path: '/reward/:id',
         component: RewardDetail,
     },
+    {
+        name: 'settings',
+        path: '/settings',
+        component: Settings,
+        meta: {
+            title: 'App settings',
+        },
+    }
 ]
 
 const history = createWebHistory()
