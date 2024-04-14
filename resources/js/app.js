@@ -24,7 +24,7 @@ const routes = [
         path: '/',
         component: Interaction,
         meta: {
-            title: 'Názov miestnosti',
+            // title: 'Názov miestnosti',
         },
     },
     {
@@ -64,7 +64,7 @@ const routes = [
         path: '/story/:id',
         component: Interaction,
         meta: {
-            title: 'Story',
+            // title: 'Story',
         },
     },
     {
@@ -120,7 +120,7 @@ const router = createRouter({
 
 const app = createApp(App)
 
-Sentry.init({ app, dsn: import.meta.env.VITE_SENTRY_DSN })
+// Sentry.init({ app, dsn: import.meta.env.VITE_SENTRY_DSN })
 
 app.use(router)
 app.use(createPinia())
