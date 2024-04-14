@@ -4,6 +4,7 @@ import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import { i18nVue } from 'laravel-vue-i18n'
 import { createPinia } from 'pinia'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import * as Sentry from '@sentry/vue'
 
 import App from './App.vue'
@@ -14,6 +15,7 @@ import SectionDetail from './views/SectionDetail.vue'
 import PlaceDetail from './views/PlaceDetail.vue'
 import RewardDetail from './views/RewardDetail.vue'
 import LockedItemDetail from './views/LockedItemDetail.vue'
+import Settings from './views/Settings.vue'
 import { useHistoryStore } from './stores/HistoryStore'
 import { useLocaleStore } from './stores/LocaleStore'
 
@@ -23,7 +25,7 @@ const routes = [
         path: '/',
         component: Interaction,
         meta: {
-            title: 'Názov miestnosti',
+            // title: 'Názov miestnosti',
         },
     },
     {
@@ -63,7 +65,7 @@ const routes = [
         path: '/story/:id',
         component: Interaction,
         meta: {
-            title: 'Story',
+            // title: 'Story',
         },
     },
     {
@@ -95,6 +97,14 @@ const routes = [
         path: '/reward/:id',
         component: RewardDetail,
     },
+    {
+        name: 'settings',
+        path: '/settings',
+        component: Settings,
+        meta: {
+            title: 'App settings',
+        },
+    }
 ]
 
 const history = createWebHistory()
@@ -111,10 +121,13 @@ const router = createRouter({
 
 const app = createApp(App)
 
-Sentry.init({ app, dsn: import.meta.env.VITE_SENTRY_DSN })
+// Sentry.init({ app, dsn: import.meta.env.VITE_SENTRY_DSN })
 
 app.use(router)
-app.use(createPinia())
+
+const pinia = createPinia()
+pinia.use(piniaPluginPersistedstate)
+app.use(pinia)
 
 const localeStore = useLocaleStore()
 app.use(i18nVue, {

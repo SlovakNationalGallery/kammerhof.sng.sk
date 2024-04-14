@@ -1,7 +1,7 @@
 <template>
     <div class="sticky px-6 pt-12 pb-2 top-0 z-20 flex w-full items-center whitespace-nowrap bg-yellow">
         <h1 class="grow text-2xl font-black" :class="{ 'text-center': route.name !== 'home' }" id="title">
-            {{ $t(openedAbout ? 'About the App' : route.meta.title ?? '') }}
+            {{ route.meta.title ??  activePlace?.title ??  "Kammerhof app"}}
         </h1>
         <div class="flex-1 border-l-2 border-transparent px-3 text-right" v-if="route.name === 'my_collection'">
             <!-- <button class="rounded-xl bg-yellow px-3 py-1 text-sm font-bold" @click="scroll('share')">
@@ -40,7 +40,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useInteractionStore } from '../stores/InteractionStore'
 import About from './About.vue'
 import HistoryBack from './HistoryBack.vue'
@@ -50,10 +50,13 @@ import SvgBack from './svg/Back.vue'
 import SvgClose from './svg/Close.vue'
 import SvgLogo from './svg/Logo.vue'
 import { useRoute, useRouter } from 'vue-router'
+import { usePlaceStore } from '../stores/PlaceStore'
+import { storeToRefs } from 'pinia'
 
 import CardModal from '../components/CardModal.vue'
 import ConfirmButton from '../components/ConfirmButton.vue'
 
+const placeStore = usePlaceStore()
 const route = useRoute()
 const router = useRouter()
 
@@ -63,6 +66,8 @@ const isActive = ref(false)
 
 const shownResetModal = ref(false)
 
+const { activePlace } = storeToRefs(placeStore)
+
 const displayTooltip = () => {
     isActive.value = true
     setTimeout(() => {
@@ -70,7 +75,7 @@ const displayTooltip = () => {
     }, 3000)
 }
 
-const title = computed(() => (this?.$route?.meta?.title ? this.$route.meta.title : 'Kammerhof App'))
+// const title = computed(() => (this?.$route?.meta?.title ? this.$route.meta.title : placeStore.place?.title ?? ''))
 
 const scroll = (id) => {
     document.getElementById(id).scrollIntoView({
@@ -78,15 +83,15 @@ const scroll = (id) => {
     })
 }
 
-interactionStore.$onAction(({ name }) => {
-    if (name === 'addItemViewed' && !interactionStore.viewedItemsCount) {
-        displayTooltip()
-    }
-})
-
 const resetInteraction = () => {
     interactionStore.clear()
     router.go()
 }
+
+onMounted(() => {
+    if (!activePlace.value) {
+        placeStore.loadPlaces()
+    }
+})
 
 </script>

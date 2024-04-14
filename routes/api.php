@@ -122,6 +122,16 @@ Route::middleware(['cacheResponse'])->group(function () {
     });
 
     /**
+     * GET api/places
+     * 
+     * Get all places.
+     * 
+     */
+    Route::get('/places', function () {
+        return PlaceResource::collection(Place::get()->sortBy('title'));
+    });
+
+    /**
      * GET api/bucketlists/{id}
      *
      * Get the items for the bucketlist/scavenger hunt. Returns the bucketlist and list of items.
