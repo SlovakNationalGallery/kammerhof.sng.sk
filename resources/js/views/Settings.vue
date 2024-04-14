@@ -30,12 +30,12 @@ import { onMounted, ref } from 'vue'
 import CaretRight from '../components/svg/CaretRight.vue'
 import { usePlaceStore } from '../stores/PlaceStore'
 import { useRouter } from 'vue-router'
+import { storeToRefs } from 'pinia'
 
 const placeStore = usePlaceStore()
 const router = useRouter()
 
-const places = placeStore.places
-const activePlaceId = placeStore.activePlaceId
+const { places, activePlaceId } = storeToRefs(placeStore)
 
 const setActivePlace = (id, story_id) => {
     placeStore.setActivePlace(id)
@@ -48,4 +48,5 @@ const setActivePlace = (id, story_id) => {
 const isActive = (placeId) => {
     return placeId === activePlaceId.value
 }
+
 </script>

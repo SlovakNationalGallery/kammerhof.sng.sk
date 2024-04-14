@@ -4,6 +4,7 @@ import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import { i18nVue } from 'laravel-vue-i18n'
 import { createPinia } from 'pinia'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import * as Sentry from '@sentry/vue'
 
 import App from './App.vue'
@@ -123,7 +124,10 @@ const app = createApp(App)
 // Sentry.init({ app, dsn: import.meta.env.VITE_SENTRY_DSN })
 
 app.use(router)
-app.use(createPinia())
+
+const pinia = createPinia()
+pinia.use(piniaPluginPersistedstate)
+app.use(pinia)
 
 const localeStore = useLocaleStore()
 app.use(i18nVue, {

@@ -40,7 +40,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useInteractionStore } from '../stores/InteractionStore'
 import About from './About.vue'
 import HistoryBack from './HistoryBack.vue'
@@ -51,6 +51,7 @@ import SvgClose from './svg/Close.vue'
 import SvgLogo from './svg/Logo.vue'
 import { useRoute, useRouter } from 'vue-router'
 import { usePlaceStore } from '../stores/PlaceStore'
+import { storeToRefs } from 'pinia'
 
 import CardModal from '../components/CardModal.vue'
 import ConfirmButton from '../components/ConfirmButton.vue'
@@ -65,7 +66,7 @@ const isActive = ref(false)
 
 const shownResetModal = ref(false)
 
-const activePlace = placeStore.activePlace
+const { activePlace } = storeToRefs(placeStore)
 
 const displayTooltip = () => {
     isActive.value = true
@@ -86,5 +87,11 @@ const resetInteraction = () => {
     interactionStore.clear()
     router.go()
 }
+
+onMounted(() => {
+    if (!activePlace.value) {
+        placeStore.loadPlaces()
+    }
+})
 
 </script>

@@ -1,7 +1,8 @@
+import { defineStore } from 'pinia'
 import { ref, computed, watch } from 'vue'
 import axios from 'axios'
 
-export const usePlaceStore = () => {
+export const usePlaceStore = defineStore('PlaceStore', () => {    
     const places = ref([])
     const activePlaceId = ref(null)
 
@@ -37,10 +38,6 @@ export const usePlaceStore = () => {
         }
     })
 
-    if (places.value.length === 0) {
-        loadPlaces()
-    }
-
     return {
         places,
         activePlaceId,
@@ -49,4 +46,9 @@ export const usePlaceStore = () => {
         reset,
         activePlace,
     }
-}
+}, {
+    persist: {
+      storage: localStorage,
+      paths: ['places', 'activePlaceId']
+    }
+})
