@@ -19,8 +19,7 @@ add('shared_dirs', ['resources/fonts']);
 set('allow_anonymous_stats', false);
 
 // Hosts
-host('kammerhof.sng.sk')
-    ->set('hostname', 'kammerhof.sng.sk')
+host('webumenia.sk')
     ->set('remote_user', 'lab_sng')
     ->set('deploy_path', '/var/www/kammerhof.sng.sk');
 
