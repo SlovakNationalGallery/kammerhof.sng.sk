@@ -3,10 +3,16 @@
         <ul class="py-6">
             <li v-for="place in places" :key="place.id">
                 <button
-                    class="w-full flex justify-between text-lg rounded-xl border-2 border-black bg-yellow/30 p-2.5 cursor-pointer font-bold mb-4 text-left"
-                    :class="{ 'bg-yellow/80 shadow-lg': isActive(place.id) }"
+                    class="w-full flex justify-between text-lg rounded-xl border-2 border-black p-2.5 cursor-pointer font-bold mb-4 text-left"
+                    :class="{ 
+                        'bg-yellow/80 shadow-lg': isActive(place.id),
+                        'bg-yellow/30': !isActive(place.id) && place.story_id,
+                        'bg-gray-softest': !place.story_id,
+
+                    }"
                     :to="{ name: 'story', params: { id: place.story_id } }"
                     @click="setActivePlace(place.id, place.story_id)"
+                    :disabled="!place.story_id"
                 >
                     <div>
                         {{ place.title }}

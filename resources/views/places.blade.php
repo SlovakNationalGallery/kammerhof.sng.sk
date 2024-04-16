@@ -11,7 +11,6 @@
         <table class="table-auto border-collapse w-full">
             <thead>
                 <tr>
-                    <th class="border-b font-bold p-4 pl-8 pt-0 pb-3 text-left">#</th>
                     <th class="border-b font-bold p-4 pl-8 pt-0 pb-3 text-left">Názov</th>
                     <th class="border-b font-bold p-4 pl-8 pt-0 pb-3 text-left"></th>
                 </tr>
@@ -19,10 +18,11 @@
             <tbody class="bg-white">
                 @foreach ($places as $place)
                 <tr>
-                    <td class="border-b border-gray-soft p-4 pl-8">{{ $place->code->id }}</td>
                     <td class="border-b border-gray-soft p-4 pl-8">{{ $place->title }}</td>
                     <td class="border-b border-gray-soft p-4 pl-8">
-                        <x-button href="/story/{{ $place->story_id }}">zobraziť príbeh</x-button>
+                        @if ($place->story_id)
+                            <x-button href="/story/{{ $place->story_id }}">zobraziť príbeh</x-button>
+                        @endif
                     </td>
                 </tr>
                 @endforeach
