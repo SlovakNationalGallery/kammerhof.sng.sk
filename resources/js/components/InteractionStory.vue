@@ -14,13 +14,40 @@
 
         <div class="my-4 md:my-6" v-for="image in story.images">
             <ResponsiveImageWithSizes class="w-full rounded-xl border-black/15 border-2" :image="image" />
+            <div class="flex justify-center">
+                <p class="text-center text-gray-medium py-2">{{ story.media_annotation }}</p>
+            </div>
         </div>
 
         <div class="relative my-4 md:my-6" v-if="story.video_embed">
             <StoryVideoLightbox :story="story"></StoryVideoLightbox>
         </div>
 
-        <button
+        <div class="bg-yellow/15 p-6 rounded-xl my-4 md:my-6 space-y-6 markdown font-bold" v-if="story.highlighted_text">
+            <div v-html="story.highlighted_text"></div>
+            <button
+            :disabled="!active"
+            v-show="activeOrTransitioning || linkId === link.id"
+            class="my-4 md:my-6 ml-auto flex items-center gap-x-2 rounded-xl border-2 px-6 py-4 text-center font-bold leading-8 justify-center"
+            :class="{
+                'border-black bg-transparent text-black': activeOrTransitioning,
+                'bg-opacity-20 text-black': activeOrTransitioning && interactionStore.hasVisitedAllLinks(link.story_id),
+                'text-black': activeOrTransitioning && !interactionStore.hasVisitedAllLinks(link.story_id),
+                'border-white/10 text-black/40': !activeOrTransitioning,
+            }"
+            @click="emit('navigate', link)"
+            v-for="link in story.links"
+        >
+            <SvgChatCircle
+                class="flex-none"
+                v-if="!activeOrTransitioning || interactionStore.hasVisitedAllLinks(link.story_id)"
+            />
+            {{ link.title }}
+        </button>
+        </div>
+
+        <div v-else>
+            <button
             :disabled="!active"
             v-show="activeOrTransitioning || linkId === link.id"
             class="my-4 md:my-6 ml-auto flex items-center gap-x-2 rounded-xl border-1 px-6 py-4 text-center font-bold leading-8 justify-center"
@@ -39,6 +66,8 @@
             />
             {{ link.title }}
         </button>
+        </div>
+
         <button
             :disabled="!active"
             v-show="activeOrTransitioning && !first"
