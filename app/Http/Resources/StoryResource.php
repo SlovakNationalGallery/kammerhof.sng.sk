@@ -19,10 +19,12 @@ class StoryResource extends JsonResource
         return [
             'id' => $this->id,
             'text' => str($this->text)->markdownWithLineBreaks(),
+            'highlighted_text' => str($this->highlighted_text)->markdownWithLineBreaks(),
             'links' => StoryLinkResource::collection($this->links),
             'images' => ImageResource::collection(
                 $this->getMedia()->filter(fn(Media $media) => $media->hasResponsiveImages())
             ),
+            'media_annotation' => $this->media_annotation,
             'video_thumbnail' => $this->video_thumbnail,
             'video_duration' => $this->video_duration ? gmdate('i:s', $this->video_duration) : null,
             'video_embed' => $this->video_embed,

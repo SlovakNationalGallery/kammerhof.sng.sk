@@ -21,6 +21,14 @@ class AirtableMapper
                 'sk' => 'Text SK',
                 'en' => 'Text EN',
             ],
+            'highlighted_text' => [
+                'sk' => 'Highlighted text SK',
+                'en' => 'Highlighted text EN',
+            ],
+            'media_annotation' => [
+                'sk' => 'Media annotation SK',
+                'en' => 'Media annotation EN',
+            ],
             'links' => 'Interakcie',
             'media' => 'Media',
             'video' => [
