@@ -23,17 +23,17 @@
             <StoryVideoLightbox :story="story"></StoryVideoLightbox>
         </div>
 
-        <div class="bg-yellow/15 p-6 rounded-xl my-4 md:my-6 space-y-6 markdown font-bold" v-if="story.highlighted_text">
+        <div class="bg-yellow/15 p-6 rounded-xl my-4 md:my-6 space-y-6 markdown font-black" v-if="story.highlighted_text">
             <div v-html="story.highlighted_text"></div>
             <button
             :disabled="!active"
             v-show="activeOrTransitioning || linkId === link.id"
-            class="my-4 md:my-6 ml-auto flex items-center gap-x-2 rounded-xl border-2 px-6 py-4 text-center font-bold leading-8 justify-center"
+            class="my-4 w-full md:my-6 ml-auto flex items-center gap-x-2 rounded-xl border-2 px-6 py-4 text-center font-bold leading-8 justify-center"
             :class="{
                 'border-black bg-transparent text-black': activeOrTransitioning,
                 'bg-opacity-20 text-black': activeOrTransitioning && interactionStore.hasVisitedAllLinks(link.story_id),
                 'text-black': activeOrTransitioning && !interactionStore.hasVisitedAllLinks(link.story_id),
-                'border-white/10 text-black/40': !activeOrTransitioning,
+                'border-transparent bg-black/15 text-black/50': !activeOrTransitioning,
             }"
             @click="emit('navigate', link)"
             v-for="link in story.links"
@@ -50,12 +50,12 @@
             <button
             :disabled="!active"
             v-show="activeOrTransitioning || linkId === link.id"
-            class="my-4 md:my-6 ml-auto flex items-center gap-x-2 rounded-xl border-1 px-6 py-4 text-center font-bold leading-8 justify-center"
+            class="my-4 w-full md:my-6 ml-auto flex items-center gap-x-2 rounded-xl border-1 px-6 py-4 text-center font-bold leading-8 justify-center"
             :class="{
                 'border-black bg-black text-white': activeOrTransitioning,
                 'bg-opacity-20 text-yellow': activeOrTransitioning && interactionStore.hasVisitedAllLinks(link.story_id),
                 'text-black': activeOrTransitioning && !interactionStore.hasVisitedAllLinks(link.story_id),
-                'border-white/10 text-black/40': !activeOrTransitioning,
+                'border-transparent bg-black/15 text-black/50': !activeOrTransitioning,
             }"
             @click="emit('navigate', link)"
             v-for="link in story.links"
@@ -71,7 +71,7 @@
         <button
             :disabled="!active"
             v-show="activeOrTransitioning && !first"
-            class="my-4 mt-7 md:my-6 ml-auto flex items-center gap-x-2 rounded-xl text-left text-lg leading-8 text-black"
+            class="my-4 w-full mt-7 md:my-6 ml-auto flex items-center justify-center gap-x-2 rounded-xl text-lg leading-8 text-black"
             @click="emit('undo')"
         >
             <SvgArrowUp class="flex-none" />

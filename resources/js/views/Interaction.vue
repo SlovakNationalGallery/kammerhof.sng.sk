@@ -13,26 +13,6 @@
                     @undo="undo(interaction)"
                     class="my-8"
                 />
-                <InteractionItemFavourited
-                    v-else-if="interaction.type === 'itemFavourited'"
-                    :item="itemStore.get(interaction.id)"
-                    class="my-4"
-                />
-                <InteractionItemViewed
-                    v-else-if="interaction.type === 'itemViewed'"
-                    :item="itemStore.get(interaction.id)"
-                    class="my-4"
-                />
-                <InteractionSectionViewed
-                    v-else-if="interaction.type === 'sectionViewed'"
-                    :section="sectionStore.get(interaction.id)"
-                    class="my-4"
-                />
-                <InteractionPlaceViewed
-                    v-else-if="interaction.type === 'placeViewed'"
-                    :place="placeStore.get(interaction.id)"
-                    class="my-4"
-                />
             </template>
         </TransitionGroup>
     </div>
@@ -53,10 +33,6 @@
 import { nextTick, onMounted } from 'vue'
 import { watchDebounced } from '@vueuse/core'
 import { useRoute } from 'vue-router'
-import InteractionItemFavourited from '../components/InteractionItemFavourited.vue'
-import InteractionItemViewed from '../components/InteractionItemViewed.vue'
-import InteractionSectionViewed from '../components/InteractionSectionViewed.vue'
-import InteractionPlaceViewed from '../components/InteractionPlaceViewed.vue'
 import InteractionStory from '../components/InteractionStory.vue'
 import { useInteractionStore } from '../stores/InteractionStore'
 import { useItemStore } from '../stores/ItemStore'
