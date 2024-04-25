@@ -1,7 +1,7 @@
 <template>
-    <div class="sticky px-6 pt-12 pb-2 top-0 z-20 flex w-full items-center whitespace-nowrap bg-yellow">
-        <h1 class="grow text-2xl font-black" :class="{ 'text-center': route.name !== 'home' }" id="title">
-            {{ route.meta.title ??  activePlace?.title ??  "Kammerhof app"}}
+    <div class="sticky px-6 pt-12 pb-2.5 top-0 z-20 flex w-full items-center whitespace-nowrap bg-yellow">
+        <h1 class="grow text-2xl font-black" id="title">
+            {{ route.meta.title ?? activePlace?.title ?? 'Kammerhof app' }}
         </h1>
         <div class="flex-1 border-l-2 border-transparent px-3 text-right" v-if="route.name === 'my_collection'">
             <!-- <button class="rounded-xl bg-yellow px-3 py-1 text-sm font-bold" @click="scroll('share')">
@@ -11,13 +11,25 @@
         <!-- <LanguageSwitcher v-else-if="route.name === 'home'" /> -->
         <!-- <ViewedItemsCount v-else class="flex-1 border-l-2 border-l-transparent px-4 py-2" :show-tooltip="isActive" /> -->
         <div class="items-center flex">
-            <button @click="shownResetModal = true" class="flex py-2 px-3 text-base font-bold items-center">
-                <svg class="w-8 h-8 fill-none stroke-black stroke-2 mr-2" viewBox="0 0 32 32">
-                    <g clip-path="url(#clip0_373_552)">
-                        <path d="M8 8C8 8 11 5 16 5C23 5 27 12 27 12" />
-                        <path d="M24 24C24 24 21 27 16 27C9 27 5 20 5 20" />
-                        <path d="M21 12H27V6" />
-                        <path d="M11 20H5V26" />
+            <button @click="shownResetModal = true" class="flex py-2 text-base font-bold items-center">
+                <svg
+                    class="w-6 h-6 fill-none stroke-black stroke-2 mr-2"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <g clip-path="url(#clip0_455_314)">
+                        <path
+                            d="M6 6C6 6 8.25 3.75 12 3.75C17.25 3.75 20.25 9 20.25 9"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                        <path
+                            d="M18 18C18 18 15.75 20.25 12 20.25C6.75 20.25 3.75 15 3.75 15"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                        <path d="M15.75 9H20.25V4.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M8.25 15H3.75V19.5" stroke-linecap="round" stroke-linejoin="round" />
                     </g>
                 </svg>
                 Začni odznova
@@ -32,7 +44,7 @@
         </div>
         <div class="flex space-x-6">
             <ConfirmButton class="" @click="shownResetModal = false">{{ $t('Close') }}</ConfirmButton>
-            <ConfirmButton class=" bg-black text-white" @click="resetInteraction">{{ $t('Reset') }}</ConfirmButton>
+            <ConfirmButton class="bg-black text-white" @click="resetInteraction">{{ $t('Reset') }}</ConfirmButton>
         </div>
     </CardModal>
 
@@ -93,5 +105,4 @@ onMounted(() => {
         placeStore.loadPlaces()
     }
 })
-
 </script>
