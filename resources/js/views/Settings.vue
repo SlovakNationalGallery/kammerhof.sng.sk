@@ -28,6 +28,10 @@
                 </button>
             </li>
         </ul>
+        <hr class="my-2">
+        <div class="py-6">
+            <button class="w-full flex justify-between text-lg rounded-xl border-2 border-black p-2.5 cursor-pointer font-bold mb-4 text-left" @click="reloadPlaces">Reset &amp; reload places</button>
+        </div>
     </div>
 </template>
 
@@ -53,6 +57,11 @@ const setActivePlace = (id, story_id) => {
 
 const isActive = (placeId) => {
     return placeId === activePlaceId.value
+}
+
+const reloadPlaces = () => {
+    placeStore.reset()
+    placeStore.loadPlaces()
 }
 
 </script>
