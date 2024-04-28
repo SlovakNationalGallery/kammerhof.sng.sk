@@ -98,6 +98,16 @@ Route::middleware(['cacheResponse'])->group(function () {
     });
 
     /**
+     * GET api/stories
+     * 
+     * Get all stories.
+     * 
+     */
+    Route::get('/stories', function () {
+        return StoryResource::collection(Story::get());
+    });
+
+    /**
      * GET api/stories/{id}
      *
      * Get the story with the given ID. 
