@@ -1,21 +1,25 @@
 <?php
 
-/**
- * Laravel - A PHP Framework For Web Artisans
- *
- * @package  Laravel
- * @author   Taylor Otwell <taylor@laravel.com>
- */
+// Override ./vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php
+// This file will be used by `php artisan serve`
+// We use it to add a Service-Worker-Allowed header for sw.js
+// A similar change needs to be made to your production web server (eg an Nginx directive)
+
+$publicPath = getcwd();
 
 $uri = urldecode(
-    parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)
+    parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) ?? ''
 );
 
-// This file allows us to emulate Apache's "mod_rewrite" functionality from the
-// built-in PHP web server. This provides a convenient way to test a Laravel
-// application without having installed a "real" web server software here.
-if ($uri !== '/' && file_exists(__DIR__.'/public'.$uri)) {
+if ($uri !== '/' && $uri != '/build/sw.js' && file_exists($publicPath.$uri)) {
     return false;
 }
 
-require_once __DIR__.'/public/index.php';
+if ($uri == '/build/sw.js') {
+    header('Service-Worker-Allowed: /');
+    header('Content-Type: text/javascript');
+    echo file_get_contents(__DIR__.'/public/build/sw.js');
+    exit;
+}
+
+require_once $publicPath.'/index.php';
