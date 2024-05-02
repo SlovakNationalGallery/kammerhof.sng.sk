@@ -43,7 +43,7 @@ export default defineConfig({
             workbox: {
                 // Add all the assets built by Vite into the public/build/assets
                 // folder to the SW cache.
-                globPatterns: ['**/*.{js,css,html,ico,jpg,png,svg,woff,woff2,ttf,eot}'],
+                globPatterns: ['**/*.{js,css,html,ico,jpg,png,svg,woff,woff2,ttf,eot,webmanifest}'],
 
                 // Define the root URL as the entrypoint for the offline app.
                 // vue-router can then takes over and shows the correct page
