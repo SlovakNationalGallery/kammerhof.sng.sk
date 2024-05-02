@@ -11,7 +11,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000000">
-    <meta name="theme-color" content="#ffffff">
+    <meta name="theme-color" content="#FFC736">
     <title>{{ trans('Kammerhof App') }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
