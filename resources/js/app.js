@@ -19,6 +19,13 @@ import Settings from './views/Settings.vue'
 import { useHistoryStore } from './stores/HistoryStore'
 import { useLocaleStore } from './stores/LocaleStore'
 
+import { registerSW } from "virtual:pwa-register"
+
+if ("serviceWorker" in navigator) {
+  // && !/localhost/.test(window.location)) {
+  registerSW();
+}
+
 const routes = [
     {
         name: 'home',

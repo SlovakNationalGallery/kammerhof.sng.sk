@@ -10,7 +10,6 @@ export const usePlaceStore = defineStore('PlaceStore', () => {
         try {
             const response = await axios.get('/api/places')
             places.value = response.data.data
-            console.log('Places loaded:', places.value)
             if (!activePlaceId.value) {
                 activePlaceId.value = import.meta.env.VITE_DEFAULT_PLACE
             }

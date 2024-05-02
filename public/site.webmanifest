@@ -1,6 +1,7 @@
 {
     "name": "Kammerhof App",
     "short_name": "Kammerhof App",
+    "description": "App for the interactice storytelling in the Kammerhof Museum",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",

@@ -4,20 +4,21 @@ import { useStorage } from '@vueuse/core'
 
 export const useStoryStore = defineStore('StoryStore', {
     state: () => ({
-        stories: useStorage('stories', {}),
+        stories: useStorage('stories', []),
     }),
     actions: {
         get(id) {
-            if (id in this.stories) {
-                return this.stories[id]
-            }
+            return this.stories.filter((story) => story.id === id)[0] ?? null
         },
-        async load(id) {
-            const response = await axios.get(`/api/stories/${id}`)
-            return (this.stories[id] = response.data.data)
+        async load() {
+            const response = await axios.get(`/api/stories`)
+            return (this.stories = response.data.data)
         },
         clearCache() {
-            this.stories = {}
+            this.stories = []
         },
+        isEmpty() {
+            return this.stories.length === 0
+        }
     },
 })

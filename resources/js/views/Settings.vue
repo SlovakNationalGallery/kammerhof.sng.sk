@@ -30,7 +30,7 @@
         </ul>
         <hr class="my-2">
         <div class="py-6">
-            <button class="w-full flex justify-between text-lg rounded-xl border-2 border-black p-2.5 cursor-pointer font-bold mb-4 text-left" @click="reloadPlaces">Reset &amp; reload places</button>
+            <button class="w-full flex justify-between text-lg rounded-xl border-2 border-black p-2.5 cursor-pointer font-bold mb-4 text-left" @click="reload">Reset &amp; reload places and stories</button>
         </div>
     </div>
 </template>
@@ -39,10 +39,12 @@
 import { onMounted, ref } from 'vue'
 import CaretRight from '../components/svg/CaretRight.vue'
 import { usePlaceStore } from '../stores/PlaceStore'
+import { useStoryStore } from '../stores/StoryStore'
 import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 
 const placeStore = usePlaceStore()
+const storyStore = useStoryStore()
 const router = useRouter()
 
 const { places, activePlaceId } = storeToRefs(placeStore)
@@ -59,9 +61,12 @@ const isActive = (placeId) => {
     return placeId === activePlaceId.value
 }
 
-const reloadPlaces = () => {
+const reload = () => {
     placeStore.reset()
     placeStore.loadPlaces()
+
+    storyStore.clearCache()
+    storyStore.load()
 }
 
 </script>
