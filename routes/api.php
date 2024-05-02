@@ -10,6 +10,7 @@ use App\Models\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Client\Pool;
 use App\Http\Resources\CodeResource;
+use App\Http\Resources\ImageResource;
 use App\Http\Resources\ItemResource;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
@@ -249,4 +250,10 @@ Route::post('discount-codes/generate', function (Request $request) {
         'success' => true,
         'code' => $discountCode->code,
     ]);
+});
+
+
+Route::get('images', function () {
+    $images = \Spatie\MediaLibrary\MediaCollections\Models\Media::get();
+    return ImageResource::collection($images);
 });
