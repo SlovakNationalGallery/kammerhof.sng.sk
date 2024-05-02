@@ -4,11 +4,10 @@
             <li v-for="place in places" :key="place.id">
                 <button
                     class="w-full flex justify-between text-lg rounded-xl border-2 border-black p-2.5 cursor-pointer font-bold mb-4 text-left"
-                    :class="{ 
+                    :class="{
                         'bg-yellow/80 shadow-lg': isActive(place.id),
                         'bg-yellow/30': !isActive(place.id) && place.story_id,
                         'bg-gray-softest': !place.story_id,
-
                     }"
                     :to="{ name: 'story', params: { id: place.story_id } }"
                     @click="setActivePlace(place.id, place.story_id)"
@@ -28,9 +27,43 @@
                 </button>
             </li>
         </ul>
-        <hr class="my-2">
+        <hr class="my-2" />
         <div class="py-6">
-            <button class="w-full flex justify-between text-lg rounded-xl border-2 border-black p-2.5 cursor-pointer font-bold mb-4 text-left" @click="reload">Reset &amp; reload places and stories</button>
+            <button
+                class="w-full flex justify-start text-lg rounded-xl border-2 border-black p-2.5 cursor-pointer font-bold mb-4 text-left"
+                @click="reload"
+            >
+                Reset &amp; reload places and stories
+            </button>
+            <button
+                class="w-full flex justify-start text-lg rounded-xl border-2 border-black p-2.5 cursor-pointer font-bold mb-4 text-left"
+                @click="prefetchImages"
+                :disabled="loading"
+            >
+                <span v-if="loading" class="mr-2">
+                    <svg
+                        class="animate-spin w-6 h-6 fill-none stroke-black stroke-2 mr-2"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <g clip-path="url(#clip0_455_314)">
+                            <path
+                                d="M6 6C6 6 8.25 3.75 12 3.75C17.25 3.75 20.25 9 20.25 9"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                            <path
+                                d="M18 18C18 18 15.75 20.25 12 20.25C6.75 20.25 3.75 15 3.75 15"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                            <path d="M15.75 9H20.25V4.5" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M8.25 15H3.75V19.5" stroke-linecap="round" stroke-linejoin="round" />
+                        </g>
+                    </svg>
+                </span>
+                Prefetch images
+            </button>
         </div>
     </div>
 </template>
@@ -42,10 +75,12 @@ import { usePlaceStore } from '../stores/PlaceStore'
 import { useStoryStore } from '../stores/StoryStore'
 import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
+import axios from 'axios'
 
 const placeStore = usePlaceStore()
 const storyStore = useStoryStore()
 const router = useRouter()
+const loading = ref(false)
 
 const { places, activePlaceId } = storeToRefs(placeStore)
 
@@ -69,4 +104,19 @@ const reload = () => {
     storyStore.load()
 }
 
+const prefetchImages = () => {
+    loading.value = true
+    axios
+        .get('/api/images')
+        .then((response) => {
+            const imagePaths = response.data.data
+            imagePaths.forEach((media) => {
+                const img = new Image()
+                img.src = media.src
+            })
+        })
+        .finally(() => {
+            loading.value = false
+        })
+}
 </script>
