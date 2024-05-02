@@ -30,20 +30,15 @@
 </style>
 
 <script setup>
-import { nextTick, onMounted } from 'vue'
+import { nextTick, onBeforeMount } from 'vue'
 import { watchDebounced } from '@vueuse/core'
 import { useRoute } from 'vue-router'
 import InteractionStory from '../components/InteractionStory.vue'
 import { useInteractionStore } from '../stores/InteractionStore'
-import { useItemStore } from '../stores/ItemStore'
-import { useSectionStore } from '../stores/SectionStore'
 import { useStoryStore } from '../stores/StoryStore'
 import { usePlaceStore } from '../stores/PlaceStore'
-import { useSurvey } from '../composables/Survey'
 
 const interactionStore = useInteractionStore()
-const itemStore = useItemStore()
-const sectionStore = useSectionStore()
 const storyStore = useStoryStore()
 const placeStore = usePlaceStore()
 const route = useRoute()
@@ -84,12 +79,15 @@ const scrollActiveIntoView = () => {
 }
 
 const loadStory = async (id) => {
-    const story = storyStore.get(id) || (await storyStore.load(id))
+    const story = storyStore.get(id)
     interactionStore.addStory(story.id)
     nextTick(scrollActiveIntoView)
 }
 
-onMounted(async () => {
+onBeforeMount(async () => {
+    if (storyStore.isEmpty()) {
+        await storyStore.load()
+    }
     if (route.params.id) {
         interactionStore.clear()
         loadStory(route.params.id)
@@ -100,15 +98,5 @@ onMounted(async () => {
     nextTick(scrollActiveIntoView)
 })
 
-const { toggle: toggleSurvey, shouldLaunch: shouldSurveyLaunch } = useSurvey()
 
-watchDebounced(
-    shouldSurveyLaunch,
-    () => {
-        if (shouldSurveyLaunch.value) {
-            toggleSurvey()
-        }
-    },
-    { immediate: true, debounce: 1000 }
-)
 </script>
