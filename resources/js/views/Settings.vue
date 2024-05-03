@@ -29,16 +29,28 @@
         </ul>
         <hr class="my-2" />
         <div class="py-6">
+            <div class="text-lg mb-4">
+                Aplikácia je v súčasnosti: 
+                <span
+                    class="inline-block w-3 h-3 rounded-full ml-2 mr-0.5 flex-shrink-0"
+                    :class="onlineAndConnected ? 'bg-green' : 'bg-red-pastel'"
+                ></span>
+                <span class="font-bold" v-if="onlineAndConnected"> online</span>
+                <span class="font-bold" v-else> offline</span>
+            </div>
             <button
                 class="w-full flex justify-start text-lg rounded-xl border-2 border-black p-2.5 cursor-pointer font-bold mb-4 text-left"
+                :class="onlineAndConnected ? 'bg-white' : 'bg-gray-softest'"
                 @click="reload"
+                :disabled="!onlineAndConnected"
             >
-                Reset &amp; reload places and stories
+                Stiahnuť a uložiť nové dáta
             </button>
             <button
                 class="w-full flex justify-start text-lg rounded-xl border-2 border-black p-2.5 cursor-pointer font-bold mb-4 text-left"
                 @click="prefetchImages"
-                :disabled="loading"
+                :class="onlineAndConnected ? 'bg-white' : 'bg-gray-softest'"
+                :disabled="loading || !onlineAndConnected"
             >
                 <span v-if="loading" class="mr-2">
                     <svg
@@ -62,20 +74,23 @@
                         </g>
                     </svg>
                 </span>
-                Prefetch images
+                Prednačítať obrázky
             </button>
         </div>
     </div>
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import CaretRight from '../components/svg/CaretRight.vue'
 import { usePlaceStore } from '../stores/PlaceStore'
 import { useStoryStore } from '../stores/StoryStore'
 import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import axios from 'axios'
+import { usePwa } from '../composables/usePwa'
+
+const { installEvent, onlineAndConnected, updateSW, showRefresh } = usePwa()
 
 const placeStore = usePlaceStore()
 const storyStore = useStoryStore()
@@ -119,4 +134,5 @@ const prefetchImages = () => {
             loading.value = false
         })
 }
+
 </script>

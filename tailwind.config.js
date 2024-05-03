@@ -39,6 +39,7 @@ module.exports = {
             },
             transparent: 'transparent',
             current: 'currentColor',
+            green: '#00C853',            
         },
         fontFamily: {
             sans: ['Satoshi-Variable', 'sans-serif'],
