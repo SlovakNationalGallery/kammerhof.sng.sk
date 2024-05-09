@@ -53,7 +53,7 @@
             class="my-4 w-full md:my-6 ml-auto flex items-center gap-x-2 rounded-xl border-1 px-6 py-4 text-center font-bold leading-8 justify-center"
             :class="{
                 'border-black bg-black text-white': activeOrTransitioning,
-                'bg-opacity-20 text-yellow': activeOrTransitioning && interactionStore.hasVisitedAllLinks(link.story_id),
+                'border-black bg-black': activeOrTransitioning && interactionStore.hasVisitedAllLinks(link.story_id),
                 'text-black': activeOrTransitioning && !interactionStore.hasVisitedAllLinks(link.story_id),
                 'border-transparent bg-black/15 text-black/50': !activeOrTransitioning,
             }"
