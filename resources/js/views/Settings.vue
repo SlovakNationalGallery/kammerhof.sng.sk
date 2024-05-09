@@ -33,24 +33,24 @@
                 Aplikácia je v súčasnosti: 
                 <span
                     class="inline-block w-3 h-3 rounded-full ml-2 mr-0.5 flex-shrink-0"
-                    :class="onlineAndConnected ? 'bg-green' : 'bg-red-pastel'"
+                    :class="online ? 'bg-green' : 'bg-red-pastel'"
                 ></span>
-                <span class="font-bold" v-if="onlineAndConnected"> online</span>
+                <span class="font-bold" v-if="online"> online</span>
                 <span class="font-bold" v-else> offline</span>
             </div>
             <button
                 class="w-full flex justify-start text-lg rounded-xl border-2 border-black p-2.5 cursor-pointer font-bold mb-4 text-left"
-                :class="onlineAndConnected ? 'bg-white' : 'bg-gray-softest'"
+                :class="online ? 'bg-white' : 'bg-gray-softest'"
                 @click="reload"
-                :disabled="!onlineAndConnected"
+                :disabled="!online"
             >
                 Stiahnuť a uložiť nové dáta
             </button>
             <button
                 class="w-full flex justify-start text-lg rounded-xl border-2 border-black p-2.5 cursor-pointer font-bold mb-4 text-left"
                 @click="prefetchImages"
-                :class="onlineAndConnected ? 'bg-white' : 'bg-gray-softest'"
-                :disabled="loading || !onlineAndConnected"
+                :class="online ? 'bg-white' : 'bg-gray-softest'"
+                :disabled="loading || !online"
             >
                 <span v-if="loading" class="mr-2">
                     <svg
@@ -88,9 +88,9 @@ import { useStoryStore } from '../stores/StoryStore'
 import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import axios from 'axios'
-import { usePwa } from '../composables/usePwa'
+import { useOnline } from '@vueuse/core'
 
-const { installEvent, onlineAndConnected, updateSW, showRefresh } = usePwa()
+const online = useOnline()
 
 const placeStore = usePlaceStore()
 const storyStore = useStoryStore()
