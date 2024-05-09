@@ -33,7 +33,7 @@
                 'border-black bg-transparent text-black': activeOrTransitioning,
                 'bg-opacity-20 text-black': activeOrTransitioning && interactionStore.hasVisitedAllLinks(link.story_id),
                 'text-black': activeOrTransitioning && !interactionStore.hasVisitedAllLinks(link.story_id),
-                'border-transparent bg-black/15 text-black/50': !activeOrTransitioning,
+                'border-black/15 bg-transparent text-black/50': !activeOrTransitioning,
             }"
             @click="emit('navigate', link)"
             v-for="link in story.links"
