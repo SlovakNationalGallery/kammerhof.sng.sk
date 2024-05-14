@@ -53,7 +53,7 @@ export default defineConfig({
                 // Stops various paths being intercepted by the service worker
                 // if they're not available offline. Telescope is a good
                 // example, if you are using that.
-                navigateFallbackDenylist: [/^\/telescope/],
+                navigateFallbackDenylist: [/^\/import/],
 
                 // Add some explicit URLs to the SW precache. This helps us
                 // work with the laravel/vite-plugin setup.
