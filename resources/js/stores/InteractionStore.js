@@ -102,7 +102,7 @@ export const useInteractionStore = defineStore('InteractionStore', {
         hasVisitedAllLinks(id) {
             const storyStore = useStoryStore()
             const story = storyStore.get(id)
-            return story?.links.every((link) => this.isVisited(link.story_id))
+            return story?.links.every((link) => this.isVisited(link.story_id) || this.active.linkId === link.id)
         },
         clear() {
             this.interactions = []
