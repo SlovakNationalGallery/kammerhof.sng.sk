@@ -13,7 +13,11 @@
         <div class="my-4 md:my-6 space-y-6 markdown" v-html="story.text"></div>
 
         <div class="my-4 md:my-6" v-for="image in story.images">
-            <img :src="image.src" :alt="image.alt" class="w-full rounded-xl border-black/15 border-2" />
+            <ImageLightbox
+                :alt="image.alt"
+                :src="image.src"
+                :imageAspectRatio="image.aspect_ratio"
+            />
             <div class="flex justify-center">
                 <p class="text-center text-gray-medium py-2">{{ story.media_annotation }}</p>
             </div>
@@ -83,6 +87,7 @@
 <script setup>
 import { computed, ref } from 'vue'
 import StoryVideoLightbox from './StoryVideoLightbox.vue'
+import ImageLightbox from './ImageLightbox.vue'
 import SvgArrowUp from './svg/ArrowUp.vue'
 import SvgChatCircle from './svg/ChatCircle.vue'
 import { useInteractionStore } from '../stores/InteractionStore'
