@@ -40,7 +40,7 @@
         >
             <SvgChatCircle
                 class="flex-none"
-                v-if="!activeOrTransitioning || interactionStore.hasVisitedAllLinks(link.story_id)"
+                v-if="!activeOrTransitioning"
             />
             {{ link.title }}
         </button>
@@ -62,7 +62,7 @@
         >
             <SvgChatCircle
                 class="flex-none"
-                v-if="!activeOrTransitioning || interactionStore.hasVisitedAllLinks(link.story_id)"
+                v-if="!activeOrTransitioning"
             />
             {{ link.title }}
         </button>
