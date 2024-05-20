@@ -16,7 +16,8 @@
             <ImageLightbox
                 :alt="image.alt"
                 :src="image.src"
-                :imageAspectRatio="image.aspect_ratio"
+                :width="image.width"
+                :height="image.height"
             />
             <div class="flex justify-center">
                 <p class="text-center text-gray-medium py-2">{{ story.media_annotation }}</p>
