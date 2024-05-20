@@ -7,8 +7,11 @@
         v-if="visible"
         @click="visible = false"
     >
-        <div class="max-h-full relative rounded-xl bg-gray-soft w-full max-w-full" :style="{ aspectRatio: imageAspectRatio}" @click.stop>
-            <img :src="src" class="rounded-xl object-contain" />
+        <div
+            class="max-h-full relative rounded-xl bg-gray-soft w-full max-w-full h-full"
+            :style="{ aspectRatio: imageAspectRatio }"
+        >
+            <img :src="src" class="w-full" ref="zoom" />
             <button
                 class="absolute top-0 right-0 cursor-pointer rounded-tr-xl bg-white p-1.5"
                 @click.stop="visible = false"
@@ -20,12 +23,24 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import SvgArrowsOut from './svg/ArrowsOut.vue'
+import { ref, onUnmounted, watch, onMounted } from 'vue'
 import SvgClose from './svg/Close.vue'
-import ZoomViewer from './ZoomViewer.vue'
+import PinchZoom from 'pinch-zoom-js'
 
 const props = defineProps(['alt', 'offsetTop', 'src', 'srcset', 'images', 'imageAspectRatio', 'imgClass'])
 
 const visible = ref(false)
+const zoom = ref(null)
+
+let pz
+
+onUnmounted(() => {
+    pz.destroy()
+})
+
+watch(zoom, (newZoom) => {
+    if (newZoom) {
+        pz = new PinchZoom(newZoom, { minZoom: 0.9 })
+    }
+})
 </script>
