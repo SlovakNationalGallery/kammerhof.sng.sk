@@ -12,14 +12,14 @@
 
         <div class="my-4 md:my-6 space-y-6 markdown" v-html="story.text"></div>
 
-        <div class="my-4 md:my-6" v-for="image in story.images">
+        <div class="my-4 md:my-6" v-for="(image, index) in story.images">
             <ImageLightbox
                 :alt="image.alt"
                 :src="image.src"
                 :width="image.width"
                 :height="image.height"
             />
-            <div class="flex justify-center">
+            <div v-if="index === story.images.length - 1" class="flex justify-center">
                 <p class="text-center text-gray-medium py-2">{{ story.media_annotation }}</p>
             </div>
         </div>
