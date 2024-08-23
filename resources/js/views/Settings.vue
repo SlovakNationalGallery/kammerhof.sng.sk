@@ -117,44 +117,64 @@ const reload = () => {
 
     storyStore.clearCache()
     storyStore.load()
+
+    caches.delete('images-cache')
 }
 
-const prefetchImages = () => {
+const clearImageCache = async () => {
+    const cacheName = 'images-cache'
+    const cacheDeleted = await caches.delete(cacheName)
+    console.log(`Cache "${cacheName}" deleted:`, cacheDeleted)
+}
+
+const prefetchImages = async () => {
     loading.value = true
 
-    axios
-        .get('/api/images')
-        .then((response) => {
-            const imagePaths = response.data.data
-            const totalImages = imagePaths.length
-            let loadedImages = 0
+    try {
+        // Clear existing image cache
+        await clearImageCache()
 
-            imagePaths.forEach((media) => {
-                const img = new Image()
-                img.src = media.src
+        // Fetch image paths from the API
+        const response = await axios.get('/api/images')
+        const imagePaths = response.data.data
 
-                img.onload = () => {
-                    loadedImages += 1
-                    if (loadedImages === totalImages) {
-                        loading.value = false
+        if (!Array.isArray(imagePaths) || imagePaths.length === 0) {
+            console.warn('No images to prefetch.')
+            return
+        }
+
+        // Open the image cache
+        const cache = await caches.open('images-cache')
+
+        // Array to hold promises for caching and loading images
+        const cacheAndLoadPromises = imagePaths.map(async (media) => {
+            try {
+                // Add the image to the cache
+                await cache.add(media.src)
+
+                // Preload the image in the browser
+                await new Promise((resolve, reject) => {
+                    const img = new Image()
+                    img.src = media.src
+                    img.onload = resolve
+                    img.onerror = () => {
+                        console.error(`Failed to load image: ${media.src}`)
+                        resolve() // Resolve even if the image fails to load to prevent blocking
                     }
-                }
-
-                img.onerror = () => {
-                    loadedImages += 1
-                    if (loadedImages === totalImages) {
-                        loading.value = false
-                    }
-                }
-            })
-
-            // If there are no images, immediately set loading to false
-            if (totalImages === 0) {
-                loading.value = false
+                })
+            } catch (cacheError) {
+                console.error(`Failed to cache image: ${media.src}`, cacheError)
+                // Continue processing other images even if one fails
             }
         })
-        .catch(() => {
-            loading.value = false
-        })
+
+        // Wait for all caching and loading operations to complete
+        await Promise.all(cacheAndLoadPromises)
+    } catch (error) {
+        console.error('An error occurred while prefetching images:', error)
+    } finally {
+        // Ensure the loading state is reset
+        loading.value = false
+    }
 }
 </script>

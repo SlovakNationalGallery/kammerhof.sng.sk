@@ -3,7 +3,6 @@ import vue from '@vitejs/plugin-vue'
 import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
 
-
 const publicIcons = [
     { src: '/favicon.ico' },
     { src: '/android-chrome-192x192.png' },
@@ -74,9 +73,22 @@ export default defineConfig({
                     }),
                 ],
 
+                runtimeCaching: [
+                    {
+                        urlPattern: ({ request }) => request.destination === 'image',
+                        handler: 'CacheFirst',
+                        options: {
+                            cacheName: 'images-cache',
+                            cacheableResponse: {
+                                statuses: [0, 200],
+                            },
+                        },
+                    },
+                ],
+
                 // Ensure the JS build does not get dropped from the cache.
                 // This allows it to be as big as 3MB
-                maximumFileSizeToCacheInBytes: 3000000,
+                maximumFileSizeToCacheInBytes: 5000000,
             },
         }),
         vue({
