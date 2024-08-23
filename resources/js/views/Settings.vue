@@ -30,7 +30,7 @@
         <hr class="my-2" />
         <div class="py-6">
             <div class="text-lg mb-4">
-                Aplikácia je v súčasnosti: 
+                Aplikácia je v súčasnosti:
                 <span
                     class="inline-block w-3 h-3 rounded-full ml-2 mr-0.5 flex-shrink-0"
                     :class="online ? 'bg-green' : 'bg-red-pastel'"
@@ -121,18 +121,40 @@ const reload = () => {
 
 const prefetchImages = () => {
     loading.value = true
+
     axios
         .get('/api/images')
         .then((response) => {
             const imagePaths = response.data.data
+            const totalImages = imagePaths.length
+            let loadedImages = 0
+
             imagePaths.forEach((media) => {
                 const img = new Image()
                 img.src = media.src
+
+                img.onload = () => {
+                    loadedImages += 1
+                    if (loadedImages === totalImages) {
+                        loading.value = false
+                    }
+                }
+
+                img.onerror = () => {
+                    loadedImages += 1
+                    if (loadedImages === totalImages) {
+                        loading.value = false
+                    }
+                }
             })
+
+            // If there are no images, immediately set loading to false
+            if (totalImages === 0) {
+                loading.value = false
+            }
         })
-        .finally(() => {
+        .catch(() => {
             loading.value = false
         })
 }
-
 </script>
