@@ -10,10 +10,6 @@ const router = useRouter()
 const historyStore = useHistoryStore()
 
 const back = () => {
-    if (historyStore.getState().back) {
-        router.back()
-    } else {
-        router.push({ name: 'home' })
-    }
+    router.push({ name: 'settings' })
 }
 </script>

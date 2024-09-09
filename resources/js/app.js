@@ -1,7 +1,7 @@
 import './bootstrap'
 
 import { createApp } from 'vue'
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import { i18nVue } from 'laravel-vue-i18n'
 import { createPinia } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
@@ -25,11 +25,11 @@ createPwa()
 
 const routes = [
     {
-        name: 'home',
+        name: 'settings',
         path: '/',
-        component: Interaction,
+        component: Settings,
         meta: {
-            // title: 'Názov miestnosti',
+            title: 'App settings',
         },
     },
     {
@@ -100,27 +100,16 @@ const routes = [
         name: 'reward_detail',
         path: '/reward/:id',
         component: RewardDetail,
-    },
-    {
-        name: 'settings',
-        path: '/settings',
-        component: Settings,
-        meta: {
-            title: 'App settings',
-        },
     }
 ]
 
-const history = createWebHistory()
+const history = createWebHashHistory();
 const router = createRouter({
     history,
     routes,
     scrollBehavior(to, from, savedPosition) {
-        if (to.name === 'home') {
-            return savedPosition
-        }
         return { top: 0 }
-    },
+    }
 })
 
 const app = createApp(App)

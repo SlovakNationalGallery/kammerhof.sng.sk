@@ -13,6 +13,8 @@ const publicIcons = [
     { src: '/safari-pinned-tab.svg' },
 ]
 
+const webmanifest = { src: '/site.webmanifest' }
+
 // Define any additional images in the Laravel public folder that are not
 // packaged via Vite and that we want to be available offline. (For example,
 // an image used in a meta og:image tag). The src is a web URL relative to
@@ -71,6 +73,9 @@ export default defineConfig({
                     ...additionalImages.map((i) => {
                         return { url: i.src, revision: `${Date.now()}` }
                     }),
+
+                    // Cache the webmanifest file
+                    { url: webmanifest.src, revision: `${Date.now()}` },
                 ],
 
                 runtimeCaching: [
