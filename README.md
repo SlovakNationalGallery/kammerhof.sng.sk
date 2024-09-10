@@ -1,8 +1,8 @@
-# atlas.sng.sk
+# The Land of Miners - kammerhof.sng.sk
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Allow SNG visitors to collect bookmarks during their on-site experience and return to them afterward to keep exploring/learning.
+This app is created for the Slovak Mining Museum in Banská Štiavnica to accompany the permanent exhibition at Kammerhof. It is optimized for tablet use and allows visitors to explore the exhibition. The app functions offline using web workers, so no internet connection is needed for on-site exploration.
 
 ![app screenshots](/resources/img/screenshots.jpg?raw=true)
 
@@ -12,38 +12,29 @@ Allow SNG visitors to collect bookmarks during their on-site experience and retu
 
 This software is built with the [Laravel framework](http://laravel.com/).
 
-It requires
+It requires:
 
 1. PHP >= 8.0.x
 1. MySQL >= 5.7
 
-**Set up** with
+**Set up** with:
 
-1. copy `.env.example` to `.env` and customize
+1. Copy `.env.example` to `.env` and customize
 1. `composer install`
 1. `npm install`
 
-**Start** with
+**Start** with:
 
 1. `npm run watch`
 1. `php artisan serve`
 
-**Test** with
+**Test** with:
 
 1. `php artisan test --env=testing`
 
-## API Documentation
-
-The API documentation is generated using [Scribe](https://scribe.knuckles.wtf) using the command
-
-1. `php artisan scribe:generate`
-
-For more details, read the [Scribe documentation](https://scribe.knuckles.wtf/laravel)
-
-
 ## Maintainer
 
-This project is maintained by [lab.SNG](http://lab.sng.sk). If you have any questions please don't hesitate to ask them by creating an issue or email us at [lab@sng.sk](mailto:lab@sng.sk).
+This project is maintained by [lab.SNG](http://lab.sng.sk). If you have any questions, please don't hesitate to ask by creating an issue or email us at [lab@sng.sk](mailto:lab@sng.sk).
 
 ## License
 
