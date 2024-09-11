@@ -10,7 +10,7 @@
         </div>
         <!-- <LanguageSwitcher v-else-if="route.name === 'home'" /> -->
         <!-- <ViewedItemsCount v-else class="flex-1 border-l-2 border-l-transparent px-4 py-2" :show-tooltip="isActive" /> -->
-        <div class="items-center flex">
+        <div class="items-center flex" v-if="!interactionStore.isEmpty()">
             <button @click="shownResetModal = true" class="flex py-2 text-base font-bold items-center">
                 <svg
                     class="w-6 h-6 fill-none stroke-black stroke-2 mr-2"
@@ -43,7 +43,11 @@
             <p>Chceš začať odznova? Konverzácia sa resetuje.</p>
         </div>
         <div class="flex space-x-6">
-            <ConfirmButton class="" @click="shownResetModal = false">{{ $t('Close') }}</ConfirmButton>
+            <ConfirmButton
+                class=""
+                @click="shownResetModal = false"
+                >{{ $t('Close') }}</ConfirmButton
+            >
             <ConfirmButton class="bg-black text-white" @click="resetInteraction">{{ $t('Reset') }}</ConfirmButton>
         </div>
     </CardModal>

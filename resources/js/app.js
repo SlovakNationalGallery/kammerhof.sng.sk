@@ -29,7 +29,7 @@ const routes = [
         path: '/',
         component: Settings,
         meta: {
-            title: 'App settings',
+            title: 'Výber miestnosti:',
         },
     },
     {

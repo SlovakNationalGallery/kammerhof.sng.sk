@@ -107,5 +107,8 @@ export const useInteractionStore = defineStore('InteractionStore', {
         clear() {
             this.interactions = []
         },
+        isEmpty() {
+            return this.interactions.length  < 2 // 1 story is always present
+        }
     },
 })
